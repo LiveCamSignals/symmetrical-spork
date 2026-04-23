@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Cam Rooms — Top Chaturbate Rooms Right Now</title>
+  <meta name="description" content="Browse the top live Chaturbate rooms sorted by viewers. Filter by gender, find the most popular performers live right now." />
+  <meta name="keywords" content="chaturbate, live cams, top rooms, live performers, cam girls, cam guys, couples live" />
+  <meta property="og:title" content="Live Cam Rooms — Top Chaturbate Rooms Right Now" />
+  <meta property="og:description" content="Browse and filter top live Chaturbate rooms by viewers, gender, and more." />
+  <meta property="og:type" content="website" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0e08;
+      --bg2: #101408;
+      --bg3: #161c0e;
+      --border: #243020;
+      --border2: #303e2a;
+      --text: #b8c8a0;
+      --text2: #788860;
+      --text3: #485838;
+      --accent: #6a8844;
+      --accent2: #5a7438;
+      --green: #4caf50;
+      --blue: #42a5f5;
+      --purple: #ab47bc;
+      --pink: #ec407a;
+      --yellow: #ffca28;
+      --link: #94b060;
+      --hover-row: #0d1209;
+      --header-bg: #080b06;
+      --sort-active: #6a8844;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.4;
+      min-height: 100vh;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Layout */
+    #app { display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    #sidebar {
+      width: 200px;
+      min-width: 200px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      padding: 16px 14px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    #sidebar h2 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text3);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-group { margin-bottom: 20px; }
+
+    .filter-group label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      padding: 2px 0;
+      color: var(--text2);
+      transition: color 0.15s;
+    }
+
+    .filter-group label:hover { color: var(--text); }
+
+    .filter-group input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 13px;
+      height: 13px;
+      cursor: pointer;
+    }
+
+    .filter-group input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+      margin-top: 6px;
+    }
+
+    .range-val {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text3);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .filter-label {
+      font-size: 11px;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+
+    #search-box {
+      width: 100%;
+      padding: 6px 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 12px;
+      outline: none;
+      margin-bottom: 4px;
+    }
+
+    #search-box:focus { border-color: var(--accent); }
+
+    /* Main */
+    #main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top bar */
+    #topbar {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    #topbar h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+
+    #topbar h1 span { color: var(--accent); }
+
+    #status-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text3);
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      padding: 3px 9px;
+    }
+
+    #status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text3);
+    }
+
+    #status-dot.live { background: var(--green); box-shadow: 0 0 5px var(--green); animation: pulse 2s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    #count-badge {
+      font-size: 11px;
+      color: var(--text2);
+      margin-left: auto;
+    }
+
+    #refresh-btn {
+      background: none;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      transition: all 0.15s;
+    }
+
+    #refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Table container */
+    #table-wrap {
+      overflow-x: auto;
+      flex: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    thead tr {
+      background: var(--header-bg);
+      position: sticky;
+      top: 41px;
+      z-index: 9;
+    }
+
+    th {
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text3);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      border-right: 1px solid var(--border);
+    }
+
+    th:last-child { border-right: none; }
+
+    th:hover { color: var(--text2); }
+
+    th.sorted { color: var(--sort-active); }
+
+    th .sort-icon { margin-left: 4px; opacity: 0.5; }
+    th.sorted .sort-icon { opacity: 1; color: var(--sort-active); }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      vertical-align: middle;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    td:last-child { border-right: none; }
+
+    tr:hover td { background: var(--hover-row); }
+
+    /* Column widths */
+    .col-rank   { width: 42px; }
+    .col-name   { width: 160px; }
+    .col-age    { width: 48px; }
+    .col-gender { width: 70px; }
+    .col-loc    { width: 110px; }
+    .col-tags   { width: 260px; }
+    .col-viewers { width: 80px; }
+    .col-new    { width: 58px; }
+    .col-link   { width: 90px; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .badge-f  { background: rgba(236,64,122,0.15); color: var(--pink); border: 1px solid rgba(236,64,122,0.3); }
+    .badge-m  { background: rgba(66,165,245,0.15); color: var(--blue); border: 1px solid rgba(66,165,245,0.3); }
+    .badge-c  { background: rgba(76,175,80,0.15);  color: var(--green); border: 1px solid rgba(76,175,80,0.3); }
+    .badge-t  { background: rgba(171,71,188,0.15); color: var(--purple); border: 1px solid rgba(171,71,188,0.3); }
+    .badge-new { background: rgba(255,202,40,0.15); color: var(--yellow); border: 1px solid rgba(255,202,40,0.3); font-size: 9px; }
+
+    .rank {
+      color: var(--text3);
+      font-size: 11px;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .rank-top { color: var(--accent); }
+
+    .viewers {
+      font-weight: 700;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .viewers-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .viewers-bar {
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-size: 10px;
+      color: var(--text3);
+      margin-right: 3px;
+      margin-bottom: 1px;
+    }
+
+    .tag:hover { color: var(--accent); border-color: var(--accent); }
+
+    .thumb {
+      width: 28px;
+      height: 28px;
+      border-radius: 3px;
+      object-fit: cover;
+      vertical-align: middle;
+      border: 1px solid var(--border2);
+    }
+
+    .name-cell {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .performer-name {
+      font-weight: 600;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .visit-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 3px 9px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+
+    .visit-btn:hover { background: var(--accent2); text-decoration: none; }
+
+    /* Loading / empty */
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      color: var(--text3);
+      gap: 16px;
+    }
+
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid var(--border2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #empty {
+      display: none;
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--text3);
+    }
+
+    /* Footer */
+    #footer {
+      background: var(--header-bg);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      font-size: 11px;
+      color: var(--text3);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    #footer a { color: var(--text3); }
+    #footer a:hover { color: var(--accent); text-decoration: none; }
+
+    .footer-sep { opacity: 0.3; }
+
+    /* Error */
+    #error-bar {
+      display: none;
+      background: #2a1010;
+      border-bottom: 1px solid #5a2020;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #f44336;
+    }
+
+    /* Tag filter pills */
+    .tag-filter-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .tag-pill {
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 2px 8px;
+      font-size: 10px;
+      color: var(--text3);
+      transition: all 0.12s;
+    }
+
+    .tag-pill.active {
+      background: rgba(255,112,67,0.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .tag-pill:hover { border-color: var(--text2); color: var(--text2); }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+      #sidebar { display: none; }
+      .col-tags, .col-loc, .col-age, .col-new { display: none; }
+    }
+
+    /* Age gate */
+    #age-gate {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #age-gate-box {
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      max-width: 480px;
+      width: 100%;
+      padding: 36px 32px;
+      text-align: center;
+    }
+
+    #age-gate-box h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    #age-gate-box .gate-icon {
+      font-size: 40px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    #age-gate-box p {
+      color: var(--text2);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    #age-gate-box p a {
+      color: var(--link);
+    }
+
+    .gate-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    #btn-enter {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 11px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    #btn-enter:hover { background: var(--accent2); }
+
+    #btn-leave {
+      background: none;
+      color: var(--text3);
+      border: 1px solid var(--border2);
+      border-radius: 5px;
+      padding: 11px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    #btn-leave:hover { border-color: var(--text2); color: var(--text2); }
+
+    #age-gate-box .gate-fine {
+      font-size: 10px;
+      color: var(--text3);
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+
+    /* Disclaimer bar */
+    #disclaimer-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 10px 16px;
+      font-size: 10px;
+      color: var(--text3);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    #disclaimer-bar a { color: var(--text3); text-decoration: underline; }
+    #disclaimer-bar a:hover { color: var(--text2); }
+  </style>
+</head>
+<body>
+<!-- Age Gate -->
+<div id="age-gate">
+  <div id="age-gate-box">
+    <span class="gate-icon">🔞</span>
+    <h2>Adults Only (18+)</h2>
+    <p>
+      This website contains adult content including live streaming video of a sexual nature.
+      By entering, you confirm that you are <strong>18 years of age or older</strong> (or the age
+      of majority in your jurisdiction, whichever is greater), that adult content is legal in
+      your jurisdiction, and that you consent to viewing such material.<br /><br />
+      All performers on this site are adults who have provided verified age documentation to
+      Chaturbate in compliance with <a href="https://chaturbate.com/legal/2257/?wm=T2CSW" target="_blank" rel="noopener">18 U.S.C. § 2257</a>.
+    </p>
+    <div class="gate-buttons">
+      <button id="btn-enter" onclick="enterSite()">I Am 18+ — Enter</button>
+      <button id="btn-leave" onclick="leaveSite()">Leave</button>
+    </div>
+    <div class="gate-fine">
+      By entering you agree to our
+      <a href="https://chaturbate.com/terms/?wm=T2CSW" target="_blank" rel="noopener">Terms of Service</a> and
+      <a href="https://chaturbate.com/privacy/?wm=T2CSW" target="_blank" rel="noopener">Privacy Policy</a>.
+      This site uses affiliate links to Chaturbate.com.
+    </div>
+  </div>
+</div>
+
+<div id="app">
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="filter-group">
+      <div style="margin-bottom:12px;">
+        <div class="filter-label" style="margin-bottom:5px;">Search</div>
+        <input type="text" id="search-box" placeholder="Name or tag…" />
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h2>Gender</h2>
+      <label><input type="checkbox" class="gender-cb" value="f" checked> Female</label>
+      <label><input type="checkbox" class="gender-cb" value="m" checked> Male</label>
+      <label><input type="checkbox" class="gender-cb" value="c" checked> Couples</label>
+      <label><input type="checkbox" class="gender-cb" value="t" checked> Trans</label>
+    </div>
+
+    <div class="filter-group">
+      <h2>Min Viewers</h2>
+      <div class="filter-label">Viewers ≥ <span id="min-viewers-val">0</span></div>
+      <input type="range" id="min-viewers" min="0" max="5000" step="50" value="0" />
+    </div>
+
+    <div class="filter-group">
+      <h2>HD Only</h2>
+      <label><input type="checkbox" id="hd-only"> HD streams only</label>
+    </div>
+
+    <div class="filter-group">
+      <h2>New Performers</h2>
+      <label><input type="checkbox" id="new-only"> New performers only</label>
+    </div>
+
+    <div class="filter-group">
+      <h2>Popular Tags</h2>
+      <div class="tag-filter-wrap" id="tag-filters"></div>
+    </div>
+
+    <div class="filter-group" style="margin-top:auto; padding-top:12px; border-top:1px solid var(--border);">
+      <div style="color:var(--text3); font-size:10px; line-height:1.6;">
+        Data from Chaturbate API.<br />
+        Refreshes every 60 seconds.<br />
+        <a href="https://chaturbate.com/in/?tour=grpz&campaign=T2CSW&track=default" target="_blank" rel="noopener">Chaturbate ↗</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <div id="main">
+    <div id="topbar">
+      <h1>Live<span>Rooms</span></h1>
+      <div id="status-pill">
+        <div id="status-dot"></div>
+        <span id="status-text">Loading…</span>
+      </div>
+      <span id="count-badge"></span>
+      <button id="refresh-btn" onclick="fetchRooms()">↻ Refresh</button>
+    </div>
+
+    <div id="error-bar">⚠ Could not load rooms. <span id="error-msg"></span> — <button onclick="fetchRooms()" style="background:none;border:none;color:#f44336;text-decoration:underline;cursor:pointer;font-size:12px;padding:0;">Retry</button></div>
+
+    <div id="loading">
+      <div class="spinner"></div>
+      <div>Fetching live rooms…</div>
+    </div>
+
+    <div id="table-wrap" style="display:none;">
+      <table id="rooms-table">
+        <thead>
+          <tr>
+            <th class="col-rank" data-col="rank" onclick="sortBy('rank')">#<span class="sort-icon">↕</span></th>
+            <th class="col-name" data-col="name" onclick="sortBy('name')">Performer<span class="sort-icon">↕</span></th>
+            <th class="col-age" data-col="age" onclick="sortBy('age')">Age<span class="sort-icon">↕</span></th>
+            <th class="col-gender" data-col="gender" onclick="sortBy('gender')">Gender<span class="sort-icon">↕</span></th>
+            <th class="col-loc" data-col="location" onclick="sortBy('location')">Location<span class="sort-icon">↕</span></th>
+            <th class="col-tags">Tags</th>
+            <th class="col-viewers" data-col="viewers" onclick="sortBy('viewers')">Viewers<span class="sort-icon">↕</span></th>
+            <th class="col-new" data-col="is_new" onclick="sortBy('is_new')">New<span class="sort-icon">↕</span></th>
+            <th class="col-link">Visit</th>
+          </tr>
+        </thead>
+        <tbody id="rooms-body"></tbody>
+      </table>
+      <div id="empty">No rooms match your filters.</div>
+    </div>
+
+    <div id="footer">
+      <span>LiveRooms.app</span>
+      <span class="footer-sep">|</span>
+      <span>🔞 Adults Only — 18+</span>
+      <span class="footer-sep">|</span>
+      <a href="https://chaturbate.com/in/?tour=grpz&campaign=T2CSW&track=default" target="_blank" rel="noopener noreferrer">Go to Chaturbate ↗</a>
+      <span class="footer-sep">|</span>
+      <a href="https://chaturbate.com/legal/2257/?wm=T2CSW" target="_blank" rel="noopener">18 U.S.C. § 2257</a>
+      <span class="footer-sep">|</span>
+      <a href="https://chaturbate.com/terms/?wm=T2CSW" target="_blank" rel="noopener">Terms</a>
+      <span class="footer-sep">|</span>
+      <a href="https://chaturbate.com/privacy/?wm=T2CSW" target="_blank" rel="noopener">Privacy</a>
+      <span style="margin-left:auto;" id="last-updated"></span>
+    </div>
+    <div id="disclaimer-bar">
+      <strong>ADULT CONTENT WARNING:</strong> This site contains sexually explicit material. All models, actors, and other persons appearing in any visual depiction of actual or simulated sexually explicit conduct appearing on this site were over 18 years of age at the time the depictions were created.
+      In compliance with the Federal Labeling and Record-Keeping Law (<a href="https://chaturbate.com/legal/2257/?wm=T2CSW" target="_blank" rel="noopener">18 U.S.C. § 2257</a>), all records required by federal law for this website are kept by Chaturbate / Multi Media LLC, the primary producer of content.
+      &nbsp;|&nbsp; This site uses affiliate links. We earn a commission when you visit Chaturbate via our links, at no cost to you.
+      &nbsp;|&nbsp; <a href="https://chaturbate.com/terms/?wm=T2CSW" target="_blank" rel="noopener">Terms of Service</a>
+      &nbsp;|&nbsp; <a href="https://chaturbate.com/privacy/?wm=T2CSW" target="_blank" rel="noopener">Privacy Policy</a>
+      &nbsp;|&nbsp; <a href="https://chaturbate.com/dmca/?wm=T2CSW" target="_blank" rel="noopener">DMCA</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Age gate
+  function enterSite() {
+    localStorage.setItem('age_verified', '1');
+    document.getElementById('age-gate').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function leaveSite() {
+    window.location.href = 'https://www.google.com';
+  }
+
+  (function() {
+    if (localStorage.getItem('age_verified') === '1') {
+      document.getElementById('age-gate').style.display = 'none';
+    } else {
+      document.body.style.overflow = 'hidden';
+    }
+  })();
+
+  const API_URL = 'https://chaturbate.com/api/public/affiliates/onlinerooms/?wm=T2CSW&client_ip=request_ip&limit=500&offset=0';
+
+  // Multiple CORS proxies tried in order — first success wins
+  const PROXIES = [
+    url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+    url => `https://proxy.cors.sh/${url}`,
+    url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+  ];
+
+  let allRooms = [];
+  let sortCol = 'viewers';
+  let sortAsc = false;
+  let refreshTimer = null;
+  let popularTags = [];
+  let activeTagFilter = null;
+  let maxViewers = 1;
+
+  const genderLabel = { f: 'Female', m: 'Male', c: 'Couple', t: 'Trans' };
+  const genderBadge = { f: 'badge-f', m: 'badge-m', c: 'badge-c', t: 'badge-t' };
+
+  function $(id) { return document.getElementById(id); }
+
+  async function fetchWithTimeout(url, ms = 10000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ms);
+    try {
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timer);
+      return res;
+    } catch (e) {
+      clearTimeout(timer);
+      throw e;
+    }
+  }
+
+  async function fetchViaProxy() {
+    let lastErr;
+    for (const proxy of PROXIES) {
+      try {
+        const proxyUrl = proxy(API_URL);
+        const res = await fetchWithTimeout(proxyUrl, 10000);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const text = await res.text();
+        // Handle both raw JSON and allorigins-wrapped response
+        let data;
+        try { data = JSON.parse(text); } catch { throw new Error('Invalid JSON'); }
+        // allorigins wraps content in { contents: "..." }
+        if (typeof data.contents === 'string') data = JSON.parse(data.contents);
+        const results = data.results || data;
+        if (!Array.isArray(results) || !results.length) throw new Error('Empty results');
+        return results;
+      } catch (e) {
+        lastErr = e;
+      }
+    }
+    throw lastErr || new Error('All proxies failed');
+  }
+
+  async function fetchRooms() {
+    setStatus('loading');
+    try {
+      const results = await fetchViaProxy();
+      processRooms(results);
+      $('error-bar').style.display = 'none';
+      setStatus('live');
+      $('last-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+      scheduleRefresh();
+    } catch (e) {
+      setStatus('error');
+      $('error-bar').style.display = 'block';
+      $('error-msg').textContent = e.message;
+      if (allRooms.length) renderTable();
+      scheduleRefresh();
+    }
+  }
+
+  function processRooms(results) {
+    allRooms = results.map((r, i) => ({
+      rank: i + 1,
+      name: r.username || '',
+      age: r.age || 0,
+      gender: r.gender || 'f',
+      location: r.location || '',
+      tags: (r.tags || []).slice(0, 8),
+      viewers: r.current_show === 'public' ? (r.num_users || 0) : (r.num_users || 0),
+      num_users: r.num_users || 0,
+      is_hd: r.is_hd || false,
+      is_new: r.is_new || false,
+      thumb: r.image_url_360x270 || r.image_url || '',
+      url: 'https://chaturbate.com/in/?tour=grpz&campaign=T2CSW&track=default&room=' + (r.username || ''),
+      current_show: r.current_show || 'public',
+    }));
+
+    maxViewers = Math.max(...allRooms.map(r => r.num_users), 1);
+
+    // Popular tags
+    const tagCount = {};
+    allRooms.forEach(r => r.tags.forEach(t => { tagCount[t] = (tagCount[t] || 0) + 1; }));
+    popularTags = Object.entries(tagCount)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 20)
+      .map(([t]) => t);
+
+    renderTagFilters();
+
+    // Update slider max
+    const maxSlider = Math.min(Math.ceil(maxViewers / 100) * 100, 10000);
+    $('min-viewers').max = maxSlider;
+
+    renderTable();
+  }
+
+  function getFilters() {
+    const genders = [...document.querySelectorAll('.gender-cb:checked')].map(c => c.value);
+    const minV = parseInt($('min-viewers').value) || 0;
+    const hdOnly = $('hd-only').checked;
+    const newOnly = $('new-only').checked;
+    const search = $('search-box').value.toLowerCase().trim();
+    return { genders, minV, hdOnly, newOnly, search };
+  }
+
+  function applyFilters(rooms) {
+    const { genders, minV, hdOnly, newOnly, search } = getFilters();
+    return rooms.filter(r => {
+      if (!genders.includes(r.gender)) return false;
+      if (r.num_users < minV) return false;
+      if (hdOnly && !r.is_hd) return false;
+      if (newOnly && !r.is_new) return false;
+      if (search && !r.name.toLowerCase().includes(search) && !r.tags.some(t => t.includes(search))) return false;
+      if (activeTagFilter && !r.tags.includes(activeTagFilter)) return false;
+      return true;
+    });
+  }
+
+  function sortRooms(rooms) {
+    return [...rooms].sort((a, b) => {
+      let av = a[sortCol], bv = b[sortCol];
+      if (typeof av === 'string') av = av.toLowerCase();
+      if (typeof bv === 'string') bv = bv.toLowerCase();
+      if (av < bv) return sortAsc ? -1 : 1;
+      if (av > bv) return sortAsc ? 1 : -1;
+      return 0;
+    });
+  }
+
+  function renderTable() {
+    const filtered = applyFilters(allRooms);
+    const sorted = sortRooms(filtered);
+
+    $('count-badge').textContent = sorted.length.toLocaleString() + ' room' + (sorted.length !== 1 ? 's' : '');
+
+    const tbody = $('rooms-body');
+    $('loading').style.display = 'none';
+    $('table-wrap').style.display = '';
+
+    if (!sorted.length) {
+      tbody.innerHTML = '';
+      $('empty').style.display = 'block';
+      return;
+    }
+    $('empty').style.display = 'none';
+
+    const rows = sorted.map((r, idx) => {
+      const displayRank = idx + 1;
+      const rankClass = displayRank <= 3 ? 'rank rank-top' : 'rank';
+      const gBadge = genderBadge[r.gender] || 'badge-f';
+      const gLabel = genderLabel[r.gender] || r.gender;
+      const barWidth = Math.round((r.num_users / maxViewers) * 60);
+      const tagsHtml = r.tags.slice(0, 5).map(t =>
+        `<span class="tag" onclick="setTagFilter('${t}')">${t}</span>`
+      ).join('');
+      const newBadge = r.is_new ? '<span class="badge badge-new">New</span>' : '';
+      const hdBadge = r.is_hd ? '<span class="badge" style="background:rgba(66,165,245,0.1);color:#42a5f5;border:1px solid rgba(66,165,245,0.3);">HD</span>' : '';
+
+      const thumb = r.thumb
+        ? `<img class="thumb" src="${r.thumb}" alt="${r.name}" loading="lazy" onerror="this.style.display='none'">`
+        : '';
+
+      return `<tr>
+        <td class="col-rank"><span class="${rankClass}">${displayRank}</span></td>
+        <td class="col-name">
+          <div class="name-cell">
+            ${thumb}
+            <span class="performer-name" title="${r.name}">${r.name}</span>
+          </div>
+        </td>
+        <td class="col-age">${r.age || '—'}</td>
+        <td class="col-gender"><span class="badge ${gBadge}">${gLabel}</span></td>
+        <td class="col-loc" title="${r.location}">${r.location || '—'}</td>
+        <td class="col-tags">${tagsHtml}</td>
+        <td class="col-viewers">
+          <div class="viewers-bar-wrap">
+            <span class="viewers">${r.num_users.toLocaleString()}</span>
+            <div class="viewers-bar" style="width:${barWidth}px"></div>
+          </div>
+        </td>
+        <td class="col-new" style="text-align:center;">${newBadge}${hdBadge}</td>
+        <td class="col-link"><a class="visit-btn" href="${r.url}" target="_blank" rel="noopener noreferrer">Visit ↗</a></td>
+      </tr>`;
+    });
+
+    tbody.innerHTML = rows.join('');
+  }
+
+  function sortBy(col) {
+    if (sortCol === col) {
+      sortAsc = !sortAsc;
+    } else {
+      sortCol = col;
+      sortAsc = col === 'name' || col === 'location' || col === 'gender';
+    }
+    document.querySelectorAll('th').forEach(th => {
+      th.classList.remove('sorted');
+      const icon = th.querySelector('.sort-icon');
+      if (icon) icon.textContent = '↕';
+    });
+    const activeTh = document.querySelector(`th[data-col="${col}"]`);
+    if (activeTh) {
+      activeTh.classList.add('sorted');
+      const icon = activeTh.querySelector('.sort-icon');
+      if (icon) icon.textContent = sortAsc ? '↑' : '↓';
+    }
+    renderTable();
+  }
+
+  function renderTagFilters() {
+    const wrap = $('tag-filters');
+    wrap.innerHTML = popularTags.map(t =>
+      `<span class="tag-pill${activeTagFilter === t ? ' active' : ''}" onclick="setTagFilter('${t}')">${t}</span>`
+    ).join('');
+  }
+
+  function setTagFilter(tag) {
+    if (activeTagFilter === tag) {
+      activeTagFilter = null;
+    } else {
+      activeTagFilter = tag;
+    }
+    renderTagFilters();
+    renderTable();
+  }
+
+  function setStatus(state) {
+    const dot = $('status-dot');
+    const txt = $('status-text');
+    dot.className = '';
+    if (state === 'live') {
+      dot.classList.add('live');
+      txt.textContent = 'Live';
+    } else if (state === 'loading') {
+      txt.textContent = 'Loading…';
+    } else {
+      txt.textContent = 'Error';
+    }
+  }
+
+  function scheduleRefresh() {
+    clearTimeout(refreshTimer);
+    refreshTimer = setTimeout(fetchRooms, 60000);
+  }
+
+  // Wire up filters
+  document.querySelectorAll('.gender-cb').forEach(cb => cb.addEventListener('change', renderTable));
+  $('hd-only').addEventListener('change', renderTable);
+  $('new-only').addEventListener('change', renderTable);
+  $('search-box').addEventListener('input', renderTable);
+  $('min-viewers').addEventListener('input', function() {
+    $('min-viewers-val').textContent = parseInt(this.value).toLocaleString();
+    renderTable();
+  });
+
+  // Init sort header
+  document.querySelector('th[data-col="viewers"]').classList.add('sorted');
+  document.querySelector('th[data-col="viewers"] .sort-icon').textContent = '↓';
+
+  fetchRooms();
+</script>
+</body>
+</html>
